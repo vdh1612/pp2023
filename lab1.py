@@ -48,11 +48,11 @@ for i in range(num_course):
     course_lst.append(cid)
     course_lst.append(name_course)
 while True:    
-    options = {"1.":"list students",
-            "2.":"list courses",
-            "3.":"Input mark",
-            "4.":"display mark",
-            "5.":"Break"}
+    options = {"option 1":"list students",
+            "option 2":"list courses",
+            "option 3":"Input mark",
+            "option 4":"display mark",
+            "option 5":"Break"}
     for key,value in options.items():
         print(key,":",value)
     choice = input("choose 1 , 2 , 3 , 4 , 5 :")
