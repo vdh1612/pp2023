@@ -5,9 +5,11 @@ def get_infor():
     name = input("Enter name of the student:")
     dob = input("Enter date of birth:")
     return sid,name,dob
-def list_students(student_list):
-   for v in student_list:
-       print(v)
+def list_students():
+    for i in range(len(sid_lst)):
+        print("The student id:",sid_lst[i])
+        print("Name: ",name_students[i])
+        print("Date of birth:",dob_lst[i])
 def get_num_course():
     return int(input("Enter number of courses: "))
 def get_course_infor():
@@ -15,38 +17,41 @@ def get_course_infor():
     cid = input()
     name_course = input("Enter name of the course:")
     return cid,name_course    
-def list_course(course_list):
-    for v in course_list:
-        print(v)
+def list_course():
+    for i in range(0,len(cid_lst)):
+        print("Course id:"+cid_lst[i])
+        print("Name of the course:"+course_name_lst[i])
 mark_lst = []
 def input_mark():
     cid = input("Enter the id of the course that you want to mark:")
-    if cid not in course_lst:
+    if cid not in cid_lst:
         print("No course was found!")   
         return 0
     for name in name_students:
         print("please enter the mark for",name,":",end = " ")
         mark = int(input())
         mark_lst.append(mark)
-    if sid not in student_lst:
+    if sid not in sid_lst:
         print("The student does not exist!")           
 def display_mark():
     for i in range(0,len(name_students)):
         print("{0}'s mark is:{1}".format(name_students[i],mark_lst[i]))
 num_student = number_student()
-student_lst = []
+sid_lst = []
 name_students = []
+dob_lst = []
 for i in range(num_student):
     sid,name,dob = get_infor()
-    student_lst.append(sid)
-    student_lst.append(name) 
+    sid_lst.append(sid)
     name_students.append(name)
+    dob_lst.append(dob)
 num_course = get_num_course()
-course_lst = []
+cid_lst = []
+course_name_lst = []
 for i in range(num_course):
     cid,name_course = get_course_infor()
-    course_lst.append(cid)
-    course_lst.append(name_course)
+    cid_lst.append(cid)
+    course_name_lst.append(name_course)
 while True:    
     options = {"option 1":"list students",
             "option 2":"list courses",
@@ -57,9 +62,9 @@ while True:
         print(key,":",value)
     choice = input("choose 1 , 2 , 3 , 4 , 5 :")
     if choice == "1":
-        list_students(student_lst)
+        list_students()
     elif choice == "2":
-        list_course(course_lst)
+        list_course()
     elif choice == "3":
         input_mark()
     elif choice == "4":
