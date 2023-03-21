@@ -1,10 +1,9 @@
 import math
 import numpy as np 
-list_course_name = []
-list_student_name = []
-list_credits = []
+
 
 class Student:
+    list_student_name = []
     def __init__(self,sid = str(),name = str(),dob = str()):
         self.sid = sid 
         self.name = name
@@ -19,7 +18,7 @@ class Student:
     @property
     def set_name(self):
         self.name = input("Please enter name of student: ")
-        list_student_name.append(self.name)
+        Student.list_student_name.append(self.name)
     def get_dob(self):
         return self.dob 
     @property
@@ -47,7 +46,9 @@ class All_students():
         print("----------------------------------------------")
             
                         
-class Courses:
+class Course:
+    list_credits = []
+    list_course_name = []
     def __init__(self,cid = str(),c_name = str(),credits = int()):
         self.cid = cid
         self.c_name = c_name
@@ -60,12 +61,12 @@ class Courses:
         return self.c_name
     def set_course_name(self):
         self.c_name = input("Enter course name:")
-        list_course_name.append(self.c_name)
+        Course.list_course_name.append(self.c_name)
     def get_credits(self):
         return self.credits
     def set_credits(self):
         self.credits = int(input(f"Enter credits for this course:"))
-        list_credits.append(self.credits) 
+        Course.list_credits.append(self.credits) 
 
             
 class All_Courses:
@@ -74,7 +75,7 @@ class All_Courses:
         self.course_list = []
     def add_course(self):
         for i in range(self.num_c):
-            single_course = Courses()
+            single_course = Course()
             single_course.set_cid()
             single_course.set_course_name()
             single_course.set_credits()
@@ -107,14 +108,16 @@ class Marks():
 class All_Mark():
     def __init__(self):
         self.marks = Marks()
+        self.student = Student()
+        self.course = Course()
         self.list_gpa = []
     def add_marks(self):
         self.course_name = input("Enter the course that you want to mark for the student :")
-        if self.course_name not in list_course_name:
+        if self.course_name not in self.course.list_course_name:
             print("The course that you entered not in the list !")
         else: 
             print(f"for the {self.course_name} course:")
-            for self.stu_name in list_student_name:
+            for self.stu_name in self.student.list_student_name:
                 print(f"Enter the mark for {self.stu_name}",end = " ")
                 self.marks.set_mark(self.stu_name,self.course_name)
             print("-------------------------------------------------")   
@@ -122,28 +125,28 @@ class All_Mark():
     def display_marks(self):
         print("------------------------------------------------")
         course_name = input("Enter the course name that you want to display marks: ")
-        if course_name not in list_course_name:
+        if course_name not in self.course.list_course_name:
             print("No courses was found !")
             return 0
         else:
             print(f"Marks for {course_name}")
-            for self.stu_name in list_student_name:
+            for self.stu_name in self.student.list_student_name:
                 mark = self.marks.get_mark(self.stu_name,course_name)
                 print(f"{self.stu_name} : {mark}")
             print("------------------------------------------------")
             
     def calculate_gpa(self):
         print("------------------------------------------------")
-        credits_array = np.array([list_credits])
-        for self.stu_name in list_student_name:
+        credits_array = np.array([self.course.list_credits])
+        for self.stu_name in self.student.list_student_name:
             product_array = np.array([])
-            for i in range(len(list_course_name)):
-                course_name = list_course_name[i]
+            for i in range(len(self.course.list_course_name)):
+                course_name = self.course.list_course_name[i]
                 mark = self.marks.get_mark(self.stu_name,course_name)
                 if mark is None:
                     print(f"No mark found for {self.stu_name}")
                     continue                
-                product = mark * list_credits[i]
+                product = mark * self.course.list_credits[i]
                 product_array = np.append(product_array, product)
             total_credits = np.sum(credits_array)
             if len(product_array) > 0:
@@ -155,7 +158,7 @@ class All_Mark():
     def sort_students_by_gpa(self):
         self.calculate_gpa()
         print("----------------------------------------------")
-        gpa_dict = dict(zip(list_student_name, self.list_gpa))
+        gpa_dict = dict(zip(self.student.list_student_name, self.list_gpa))
         sorted_gpa_dict = dict(sorted(gpa_dict.items(), key = lambda gpa: gpa[1], reverse=True))   
         print("After students's name are sorted by GPA (descending):")
         for student, gpa in sorted_gpa_dict.items():
