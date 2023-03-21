@@ -153,6 +153,7 @@ class All_Mark():
         print("----------------------------------------------")
 
     def sort_students_by_gpa(self):
+        self.calculate_gpa()
         print("----------------------------------------------")
         gpa_dict = dict(zip(list_student_name, self.list_gpa))
         sorted_gpa_dict = dict(sorted(gpa_dict.items(), key = lambda gpa: gpa[1], reverse=True))   
