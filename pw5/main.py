@@ -17,7 +17,7 @@ def main():
                 "option 9":"Break"}
         for key,value in options.items():
             print(key,":",value)
-        choice = input("choose 1 , 2 , 3 , 4 , 5 ,6 ,7: ")
+        choice = input("choose 1 , 2 , 3 , 4 , 5 ,6 ,7 ,8 ,9: ")
         if choice == "1":
             output_data.display_students_info()          
         elif choice == "2":

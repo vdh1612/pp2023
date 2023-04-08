@@ -93,6 +93,9 @@ class Save:
             with open("marks.txt","r") as infile:
                 outfile.write(infile.read())
                 outfile.write("\nEnd\n")
+        os.remove("students.txt")
+        os.remove("courses.txt")
+        os.remove("marks.txt")
                 
 class Open:
     def decompress():

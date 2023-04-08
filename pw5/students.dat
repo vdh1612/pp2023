@@ -1,0 +1,14 @@
+student id : 162,name : hieu,date of birth: 2003
+student id : 373,name : quang,date of birth: 2003
+
+End
+course id : 1,course name : java,numbers of credits : 3
+course id : 2,course name : pythons,numbers of credits : 4
+
+End
+in the java, hieu : 14.0
+in the java, quang : 15.0
+in the pythons, hieu : 17.0
+in the pythons, quang : 12.0
+
+End
